@@ -1,7 +1,10 @@
 package com.flight.searchengine.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flight.searchengine.entity.FlightDetails;
@@ -31,6 +34,11 @@ public class SearchEngineController {
 	public String delete1(){
 			repo.deleteById(5) ;
 			return	"DELETED";
+	}
+	
+	@RequestMapping("/fetchFlight")
+	public List<FlightDetails> fetchFlight(@RequestParam FlightDetails request){
+			return repo.getAvailableFlights(request.getDeparture().toLocalDateTime(), request.getArrival().toLocalDateTime(), request.getSource(), request.getDestination()) ;
 	}
 	
 	@RequestMapping("/csvinsert")

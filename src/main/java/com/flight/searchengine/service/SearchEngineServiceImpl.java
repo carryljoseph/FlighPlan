@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,8 @@ public class SearchEngineServiceImpl implements SearchEngineService{
 	
 	}
 	
+	SimpleDateFormat ft = 
+		      new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
 	
 	String line="";
 	
@@ -58,6 +62,15 @@ public class SearchEngineServiceImpl implements SearchEngineService{
 			
 			exp.printStackTrace();
 		}
+	}
+
+	@Override
+	public void fetchFlightDataFlightDetails(FlightDetails details) {
+		LocalDateTime departure = details.getDeparture().toLocalDateTime();
+		LocalDateTime arrival = details.getArrival().toLocalDateTime();
+		repo.getAvailableFlights(departure, arrival);
+	
+		
 	}
 
 }

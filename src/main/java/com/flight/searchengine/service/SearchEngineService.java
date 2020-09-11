@@ -11,5 +11,6 @@ public interface SearchEngineService{
 
 	public void insertDataFromCsv();
 	
+	public void fetchFlightDataFlightDetails(FlightDetails details);
 	
 }
